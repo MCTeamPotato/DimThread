@@ -1,0 +1,12 @@
+modLoader = "javafml"
+loaderVersion = "[36,)"
+license="MIT"
+
+[[mods]]
+modId = "dimthread"
+version = "${version}"
+displayName = "Dimensional Threading"
+authors="Team Potato"
+description = '''
+
+'''

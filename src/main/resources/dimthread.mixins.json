@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dimthread.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "api.BooleanRuleAccessor",
+    "api.GameRulesAccessor",
+    "api.IntRuleAccessor",
+    "EntityMixin",
+    "MinecraftServerMixin",
+    "RedstoneWireBlockMixin",
+    "ServerChunkManagerMixin",
+    "WorldMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
