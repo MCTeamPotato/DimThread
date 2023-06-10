@@ -1,6 +1,6 @@
 package dimthread.gamerule;
 
-import dimthread.gamerule.api.GameRuleFactory;
+import dimthread.api.gamerule.GameRuleFactory;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 

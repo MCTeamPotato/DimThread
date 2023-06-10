@@ -1,4 +1,4 @@
-package dimthread.gamerule.api;
+package dimthread.api.gamerule;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import dimthread.mixin.api.BooleanRuleAccessor;

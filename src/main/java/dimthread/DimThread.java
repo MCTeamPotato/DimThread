@@ -1,5 +1,6 @@
 package dimthread;
 
+import dimthread.api.ThreadPool;
 import dimthread.init.ModGameRules;
 import dimthread.thread.IMutableMainThread;
 import dimthread.util.ServerManager;

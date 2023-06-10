@@ -1,4 +1,4 @@
-package dimthread;
+package dimthread.api;
 
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;

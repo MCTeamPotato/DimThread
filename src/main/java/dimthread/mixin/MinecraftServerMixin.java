@@ -1,7 +1,7 @@
 package dimthread.mixin;
 
 import dimthread.DimThread;
-import dimthread.ThreadPool;
+import dimthread.api.ThreadPool;
 import dimthread.util.CrashInfo;
 import net.minecraft.network.packet.s2c.play.WorldTimeUpdateS2CPacket;
 import net.minecraft.server.MinecraftServer;

@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface GameRulesAccessor {
     @Invoker("register")
     static <T extends GameRules.Rule<T>> GameRules.Key<T> callRegister(String name, GameRules.Category category, GameRules.Type<T> type) {
-        throw new AssertionError("This shouldn't happen!");
+        throw new UnsupportedOperationException("This shouldn't happen!");
     }
 }

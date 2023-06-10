@@ -1,7 +1,7 @@
 package dimthread.gamerule;
 
 import dimthread.DimThread;
-import dimthread.gamerule.api.GameRuleRegistry;
+import dimthread.api.gamerule.GameRuleRegistry;
 import net.minecraft.world.GameRules;
 
 @SuppressWarnings({"CanBeFinal", "FieldMayBeFinal", "unused"})

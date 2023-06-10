@@ -1,4 +1,4 @@
-package dimthread.gamerule.api;
+package dimthread.api.gamerule;
 
 import dimthread.mixin.api.GameRulesAccessor;
 import net.minecraft.world.GameRules;

@@ -1,6 +1,6 @@
 package dimthread.util;
 
-import dimthread.ThreadPool;
+import dimthread.api.ThreadPool;
 import dimthread.init.ModGameRules;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;

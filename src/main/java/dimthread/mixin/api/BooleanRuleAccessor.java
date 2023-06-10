@@ -12,6 +12,6 @@ import java.util.function.BiConsumer;
 public interface BooleanRuleAccessor {
     @Invoker
     static GameRules.Type<GameRules.BooleanRule> invokeCreate(boolean initialValue, BiConsumer<MinecraftServer, GameRules.BooleanRule> changeCallback) {
-        throw new AssertionError("This shouldn't happen!");
+        throw new UnsupportedOperationException("This shouldn't happen!");
     }
 }
