@@ -12,10 +12,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BooleanSupplier;
 
@@ -34,9 +33,9 @@ public abstract class MinecraftServerMixin {
 	 *
 	 * @see MinecraftServerMixin#tickWorlds(BooleanSupplier, CallbackInfo)
 	 * */
-	@ModifyVariable(method = "tickWorlds", at = @At(value = "INVOKE_ASSIGN",
-			target = "Lnet/minecraft/server/MinecraftServer;getWorldArray()[Lnet/minecraft/server/world/ServerWorld;", ordinal = 0))
-	public ServerWorld[] tickWorlds(Iterator<?> oldValue) {
+	@Redirect(method = "tickWorlds", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/server/MinecraftServer;getWorldArray()[Lnet/minecraft/server/world/ServerWorld;"))
+	public ServerWorld[] tickWorlds(MinecraftServer instance) {
 		return DimThread.MANAGER.isActive((MinecraftServer)(Object)this) ?  new ServerWorld[]{} : getWorldArray();
 	}
 
