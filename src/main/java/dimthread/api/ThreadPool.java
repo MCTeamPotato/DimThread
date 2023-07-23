@@ -1,9 +1,11 @@
 package dimthread.api;
 
 import java.util.Iterator;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.IntPredicate;
 
@@ -59,36 +61,58 @@ public class ThreadPool {
         this.executor.shutdown();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static class IntLatch {
-        private CountDownLatch latch;
+        private final Lock lock = new ReentrantLock();
+        private final Condition condition = lock.newCondition();
+        private int count;
 
         private IntLatch() {
             this(0);
         }
 
-        @SuppressWarnings("SameParameterValue")
         private IntLatch(int count) {
-            this.latch = new CountDownLatch(count);
+            this.count = count;
         }
 
-        private synchronized int getCount() {
-            return (int)this.latch.getCount();
+        private int getCount() {
+            lock.lock();
+            try {
+                return count;
+            } finally {
+                lock.unlock();
+            }
         }
 
-        private synchronized void decrement() {
-            this.latch.countDown();
-            this.notifyAll();
+        private void decrement() {
+            lock.lock();
+            try {
+                count--;
+                condition.signalAll();
+            } finally {
+                lock.unlock();
+            }
         }
 
-        private synchronized void increment() {
-            this.latch = new CountDownLatch((int)this.latch.getCount() + 1);
-            this.notifyAll();
+        private void increment() {
+            lock.lock();
+            try {
+                count++;
+                condition.signalAll();
+            } finally {
+                lock.unlock();
+            }
         }
 
         @SuppressWarnings("BlockingMethodInNonBlockingContext")
-        private synchronized void waitUntil(IntPredicate predicate) throws InterruptedException {
-            while(!predicate.test(this.getCount())) {
-                this.wait();
+        private void waitUntil(IntPredicate predicate) throws InterruptedException {
+            lock.lock();
+            try {
+                while (!predicate.test(count)) {
+                    condition.await();
+                }
+            } finally {
+                lock.unlock();
             }
         }
     }

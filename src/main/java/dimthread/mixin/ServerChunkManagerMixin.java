@@ -17,7 +17,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class ServerChunkManagerMixin extends ChunkManager implements IMutableMainThread {
 
 	@Shadow @Final @Mutable private Thread serverThread;
-	@Shadow @Final private ServerWorld world;
+	@Shadow @Final
+	public ServerWorld world;
 
 	@Override
 	public Thread getMainThread() {
